@@ -2,6 +2,7 @@
 
 An AI assistant that responds in the voice of a specific ethical framework (starting with Adlerian philosophy). The system is designed for practical CI/CD exposure while keeping human review and safety in the loop.
 
+
 ## System Architecture (Mermaid)
 ```mermaid
 flowchart TB
