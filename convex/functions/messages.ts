@@ -1,5 +1,6 @@
 import { v } from "convex/values";
 import { mutation, query } from "../_generated/server";
+import { generateInferenceResponse } from "../../lib/inference/provider";
 
 export const getMessages = query({
   args: { conversationId: v.string() },
@@ -30,8 +31,15 @@ export const sendMessage = mutation({
       createdAt: now,
     });
 
-    // Placeholder for LLM inference. Replace with Convex action later.
-    const assistantReply = `Adlerian response to: ${args.content}`;
+    const inference = await generateInferenceResponse({
+      prompt: args.content,
+      provider: (process.env.LLM_PROVIDER ?? "huggingface") as
+        | "huggingface"
+        | "stub",
+      model: process.env.HUGGINGFACE_MODEL ?? "google/flan-t5-small",
+      accessToken: process.env.HUGGINGFACE_API_TOKEN ?? "",
+    });
+    const assistantReply = inference.text;
 
     const assistantMessageId = await ctx.db.insert("messages", {
       conversationId: args.conversationId,
