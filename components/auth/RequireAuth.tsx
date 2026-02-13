@@ -1,0 +1,9 @@
+import type { ReactNode } from "react";
+
+type RequireAuthProps = {
+  children: ReactNode;
+};
+
+export default function RequireAuth({ children }: RequireAuthProps) {
+  return <>{children}</>;
+}
