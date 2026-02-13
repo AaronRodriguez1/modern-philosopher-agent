@@ -27,7 +27,7 @@ export default function ChatPageClient() {
       <p>Demo chat page wired to Convex.</p>
 
       <div style={{ border: "1px solid #ddd", padding: 12, minHeight: 160 }}>
-        {messages?.map((m) => (
+        {messages?.map((m: { _id: string; role: string; content: string }) => (
           <div key={m._id} style={{ marginBottom: 8 }}>
             <strong>{m.role}:</strong> {m.content}
           </div>
