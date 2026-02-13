@@ -28,4 +28,6 @@ jobs:
         run: npm run typecheck
 
       - name: Build
+        env:
+          NEXT_PUBLIC_CONVEX_URL: https://example.convex.cloud
         run: npm run build
